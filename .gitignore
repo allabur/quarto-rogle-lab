@@ -1,0 +1,24 @@
+# Quarto
+.quarto/
+_site/
+_freeze/
+*.tex
+!_extensions/**/*.tex
+
+# Rendered outputs
+*.pdf
+*.html
+!_extensions/**/*.html
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python / venv
+.venv/
+__pycache__/
+*.pyc
+
+/.quarto/
+**/*.quarto_ipynb

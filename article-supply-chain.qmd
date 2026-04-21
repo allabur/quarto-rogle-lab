@@ -1,0 +1,242 @@
+---
+# ============================================================================
+# EXAMPLE — Technical note / case study rendered with the upv-lab extension
+# ============================================================================
+
+title: "Advanced Supply Chain Optimization: A Practical Case Study"
+subtitle: "Nota técnica"
+
+course:
+  subject: "Logistics and Supply Chain Management"
+  lab-type: "Nota técnica"
+  degree: "Master in Industrial Engineering"
+  academic-year: "2025/2026"
+
+author:
+  - id: allabur
+    number: 1
+    name:
+      given: "Alberto"
+      family: "Lacort"
+      literal: "Alberto Lacort"
+      dropping-particle: string
+      non-dropping-particle: string
+    url: github.com/allabur
+    email: allabur@upv.es
+    phone: "+34 677 123 416"
+    degrees:
+      - MsSc
+    orcid: "0000-0001-7571-0494"
+    note: "Author note"
+    acknowledgements: "Acknowledgements text"
+    attributes:
+      corresponding: true
+      equal-contributor: false
+      deceased: false
+    roles:
+      - writing – original draft
+      - writing – review & editing
+      - formal analysis
+      - funding acquisition
+      - conceptualization
+      - data curation
+      - investigation
+      - methodology
+      - project administration
+      - resources
+      - software
+      - validation
+      - visualization
+    affiliations:
+      - ref: upv
+      - ref: polymtl
+  - id: juma2
+    number: 2
+    name:
+      given: "Julien"
+      family: "Maheut"
+      literal: "Julien Maheut"
+    email: juma2@upv.es
+    orcid: "0000-0002-5796-9053"
+    roles:
+      - supervision
+      - funding acquisition
+      - project administration
+    affiliations:
+      - ref: upv
+  - id: nadia.lahrichi
+    number: 3
+    name:
+      given: "Nadia"
+      family: "Lahrichi"
+      literal: "Nadia Lahrichi"
+    email: nadia.lahrichi@polymtl.ca
+    orcid: "0000-0002-9185-9077"
+    roles:
+      - supervision
+      - funding acquisition
+      - project administration
+    affiliations:
+      - ref: polymtl
+affiliations:
+  - id: upv
+    number: 1
+    name: Universitat Politècnica de València
+    department: Departamento de Organización de Empresas
+    group: ROGLE
+    address: Camino de Vera, s/n
+    city: València
+    region: València
+    country: Spain
+    postal-code: 46022
+    url: "https://upv.es"
+  - id: polymtl
+    number: 2
+    name: Polytechnique Montréal
+    department: Département de mathématiques et de génie industriel
+    group: CIRRELT
+    address: 2900 Boulevard Édouard-Montpetit
+    city: Montréal
+    region: Québec
+    country: Canada
+    postal-code: H3T 1J4
+    url: "https://polymtl.ca"
+
+date: today
+date-format: long
+lang: en
+# ============================================================================
+# FOOTER METADATA
+# ============================================================================
+
+# Copyright information (appears in footer)
+copyright:
+  holder: "Alberto Lacort"
+  year: 2025
+
+# License (appears in footer)
+license:
+  name: "CC BY-NC-ND"
+  version: "4.0"
+
+upv-footer:
+  content: license
+
+# Citation information (optional, for reference)
+citation:
+  id: "lacort2025supply"
+  type: "article-journal"
+  container-title: "RIUNET Repositorio UPV"
+  issued:
+    year: 2025
+  volume: 42
+  issue: 3
+  doi: "10.5555/example"
+
+# ============================================================================
+# DOCUMENT METADATA
+# ============================================================================
+
+abstract: |
+  This article presents a comprehensive analysis of supply chain optimization
+  using mixed-integer linear programming (MILP). Through a real-world case study,
+  we demonstrate how mathematical optimization techniques can deliver significant
+  cost reductions (18%) while improving service levels. The implementation approach
+  and lessons learned are documented for practitioners.
+
+keywords:
+  - "supply chain optimization"
+  - "MILP"
+  - "operations research"
+  - "logistics"
+---
+
+\newpage
+
+# Introduction
+
+This article demonstrates a practical application of supply chain optimization techniques
+using mixed-integer linear programming (MILP). The footer below contains automatically
+generated metadata from the YAML front-matter.
+This article demonstrates a practical application of supply chain optimization techniques
+using mixed-integer linear programming (MILP). The footer below contains automatically
+generated metadata from the YAML front-matter.
+This article demonstrates a practical application of supply chain optimization techniques
+using mixed-integer linear programming (MILP). The footer below contains automatically
+generated metadata from the YAML front-matter.
+
+
+## Background
+
+Supply chain efficiency is critical for competitive advantage in modern manufacturing.
+High logistics costs and inefficient distribution networks directly impact profitability.
+
+## Objective
+
+This study aims to optimize distribution networks, reduce operational costs, and improve
+service metrics through mathematical optimization.
+
+# Methodology
+
+## Problem Definition
+
+We formulated the supply chain optimization as a MILP model:
+
+$$\min Z = \sum_i \sum_j c_{ij} x_{ij} + \sum_k f_k y_k$$
+
+Subject to:
+- Demand constraints: $\sum_j x_{ij} \geq d_i$ for all customers $i$
+- Capacity constraints: $\sum_i x_{ij} \leq M_j y_j$ for all warehouses $j$
+- Binary constraints: $y_j \in \{0, 1\}$ for warehouse activation
+
+## Solution Approach
+
+We used commercial MILP solvers (CPLEX/Gurobi) with Python for data processing
+and model formulation. The optimization was performed on historical data from 2023-2024.
+
+# Results
+
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Annual logistics cost | €2,400,000 | €1,970,000 | -18% |
+| Warehouse count | 5 | 4 | -20% |
+| Customer satisfaction | 92% | 96% | +4% |
+| Delivery time (avg) | 4.2 days | 3.1 days | -26% |
+
+: Key Performance Indicators {#tbl-results}
+
+## Key Findings
+
+1. **Cost Optimization**: Consolidated warehouse network reduced logistics costs significantly
+2. **Service Improvement**: Centralization paradoxically improved delivery times
+3. **Scalability**: Solution remains effective for 20% demand growth
+
+# Discussion
+
+The results demonstrate that advanced optimization techniques can unlock substantial
+value in logistics networks. The 18% cost reduction translates to millions in annual savings.
+
+Implementation challenges included data quality issues and stakeholder resistance to
+warehouse closures. A phased transition approach proved effective.
+
+# Conclusion
+
+This case study validates the effectiveness of MILP-based supply chain optimization in
+real-world manufacturing contexts. The methodology is scalable and transferable to other
+industry sectors.
+
+## Recommendations
+
+- Implement continuous optimization reviews (quarterly)
+- Extend model to include dynamic demand scenarios
+- Consider international network expansion
+
+# References
+
+::: {#refs}
+:::
+
+---
+
+**Document Footer**: The footer below contains copyright, license, and page information
+automatically generated from YAML metadata. This demonstrates the YAML → Pandoc → LaTeX integration.

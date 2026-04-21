@@ -1,0 +1,333 @@
+---
+# ============================================================================
+# EXAMPLE — Lab 3 statement using the upv-lab extension
+# ============================================================================
+
+title: "Inventory Models with Stochastic Demand: Periodic Review Model"
+subtitle: "Lab 3 — Simulation in Excel"
+subject: "Logistics and Supply Chain Management"
+
+author:
+  - id: allabur
+    number: 1
+    name:
+      given: "Alberto"
+      family: "Lacort"
+      literal: "Alberto Lacort"
+      dropping-particle: string
+      non-dropping-particle: string
+    url: github.com/allabur
+    email: allabur@upv.es
+    phone: "+34 677 123 416"
+    degrees:
+      - MsSc
+    orcid: "0000-0001-7571-0494"
+    note: "Author note"
+    acknowledgements: "Acknowledgements text"
+    attributes:
+      corresponding: true
+      equal-contributor: false
+      deceased: false
+    roles:
+      - writing – original draft
+      - writing – review & editing
+      - formal analysis
+      - funding acquisition
+      - conceptualization
+      - data curation
+      - investigation
+      - methodology
+      - project administration
+      - resources
+      - software
+      - validation
+      - visualization
+    affiliations:
+      - ref: upv
+      - ref: polymtl
+  - id: juma2
+    number: 2
+    name:
+      given: "Julien"
+      family: "Maheut"
+      literal: "Julien Maheut"
+    email: juma2@upv.es
+    orcid: "0000-0002-5796-9053"
+    roles:
+      - supervision
+      - funding acquisition
+      - project administration
+    affiliations:
+      - ref: upv
+affiliations:
+  - id: upv
+    number: 1
+    name: Universitat Politècnica de València
+    department: Departamento de Organización de Empresas
+    group: ROGLE
+    address: Camino de Vera, s/n
+    city: València
+    region: València
+    country: Spain
+    postal-code: 46022
+    url: "https://upv.es"
+  - id: polymtl
+    number: 2
+    name: Polytechnique Montréal
+    department: Département de mathématiques et de génie industriel
+    group: CIRRELT
+    address: 2900 Boulevard Édouard-Montpetit
+    city: Montréal
+    region: Québec
+    country: Canada
+    postal-code: H3T 1J4
+    url: "https://polymtl.ca"
+
+date: "2025-11-20"
+lang: en
+
+# ============================================================================
+# FOOTER METADATA
+# ============================================================================
+
+# Copyright information (appears in footer)
+copyright:
+  holder: "Alberto Lacort and Julien Maheut"
+  year: 2025
+
+# License (appears in footer)
+license:
+  name: "CC BY-NC-ND"
+  # url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  # logo: "./assets/license/cc-by-nc-sa.png"
+
+# Citation information (optional, for reference)
+citation:
+  id: "lacort2025supply"
+  type: "article-journal"
+  container-title: "RIUNET Repositorio UPV"
+  issued:
+    year: 2025
+  volume: 42
+  issue: 3
+  doi: "10.5555/example"
+
+# ============================================================================
+# DOCUMENT METADATA
+# ============================================================================
+
+abstract: "This laboratory practice examines inventory management under stochastic demand through the implementation of a Periodic Review (R, S) policy. Students develop Monte Carlo simulation models in Excel to evaluate system performance metrics, particularly the Fill Rate, and optimize policy parameters to achieve service level targets of 95% in a lost-sales environment with sporadic demand patterns."
+keywords: ["inventory management", "stochastic demand", "periodic review", "simulation", "Excel"]
+
+upv-footer:
+  content: license
+---
+
+\newpage
+
+# Introduction {#sec-intro}
+
+Inventory management in uncertain environments requires robust strategies to balance service levels with holding costs. In this laboratory session, we explore the **Periodic Review System**, a fundamental policy for managing products with sporadic or lumpy demand. Through **Monte Carlo simulation**, students will model the stochastic nature of demand and lead times to evaluate system performance.
+
+::: {.callout-important}
+## Learning Objectives
+
+1. Understand the use of simulation as a method of experimentation.
+2. Develop a basic inventory management model.
+3. Understand the effect of randomness on the functioning of a system.
+:::
+
+::: {.callout-warning}
+## Lab Details
+
+**Duration:** 3 hours | **Format:** Team work
+
+**Prerequisites:** Basic knowledge of Microsoft Excel® spreadsheet, in particular those mentioned in @sec-appendix.
+
+**Resources:** Workstation with Microsoft Excel® and the template provided.
+:::
+
+# Case Study: *Corporación Industrial del Turia* {#sec-case-study}
+
+*Corporación Industrial del Turia* stands as one of your most significant clients, contributing approximately 23% to your annual revenue. This strategic partner sources a diverse range of components from your firm, many of which exhibit lumpy or sporadic demand patterns—characterized by low volumes and irregular order intervals. Recently, management has raised concerns regarding the service level provided for a specific critical component: the 12H47 Needle Bearing.
+
+The demand for this item is highly variable and does not conform to standard parametric distributions like the Normal distribution, necessitating an empirical or simulation-based approach for analysis. Historical data from the past year indicates that the 12H47 Needle Bearing is invariably ordered in single units, with an average daily demand of $\lambda = 0.1$ units.
+
+Currently, the inventory for this SKU is managed using a Periodic Review System. The stock position is reviewed once a week, specifically every Monday morning. At this review point, an order is placed to raise the inventory position up to a pre-defined level ($S$). The quantity ordered ($Q$) is calculated as the difference between this Order-Up-To Level ($S$) and the current on-hand inventory. At present, the policy is set with an Order-Up-To Level of $S = 1$ unit.
+
+The supply chain operates with a fixed lead time: orders placed on Monday are delivered by the supplier on the following Wednesday. Consequently, the received units become available for fulfilling customer demand starting from Thursday morning, the day after receipt.
+
+The company operates under a strict "lost sales" policy, meaning that if a customer order cannot be met immediately from stock, the sale is lost to a competitor. To maintain the strategic relationship with *Corporación Industrial del Turia*, management has established a strict performance target: a **Fill Rate of 95%**. Your task is to evaluate if the current policy meets this target and, if not, to propose necessary adjustments.
+
+# Laboratory Activities {#sec-activities}
+
+This section outlines the work you will perform during the session. The activities follow a logical progression: first you will build and validate your simulation model, then analyze its behavior through statistical replication, optimize the policy parameters, and finally synthesize your findings into management recommendations. Document your work carefully as you proceed through each stage.
+
+## Part 1: Model Development and Validation
+
+Begin by constructing your simulation model using the provided Excel template. The technical specifications are detailed in @sec-appendix, but the general approach is straightforward: you need to simulate the daily operations of the 12H47 Needle Bearing inventory system over a one-year period (50 weeks, or 350 days).
+
+Your model must capture several key elements of the system described in @sec-case-study. First, demand arrives randomly each day. Second, every Monday morning the inventory is reviewed and, if necessary, an order is placed to replenish stock up to level $S$. Third, orders take two days to arrive—placed Monday, delivered Wednesday—and become available for use the following day. Finally, when demand cannot be met from available stock, those units are lost (the customer goes elsewhere).
+
+Before you start analyzing results, take time to validate your model. Does inventory decrease when customers order? Does it increase when shipments arrive? You should never see negative inventory values—that would be physically impossible. Orders should only appear on Mondays, and only when inventory falls below $S$. Run through the first week or two manually to convince yourself the logic is sound.
+
+Once validated, run your simulation and calculate the Fill Rate for the current policy ($S=1$). This metric, defined as the percentage of demanded units that were successfully served, will be your baseline for comparison:
+
+$$\text{Fill Rate} = \frac{\text{Units Served}}{\text{Units Demanded}} \times 100\%$$
+
+## Part 2: Statistical Analysis through Replication
+
+You might be tempted to stop after one simulation run, but that would be a mistake. Because demand is random, each simulation produces a different outcome. One run might show excellent performance simply due to luck (low demand realizations), while another might show poor results for the opposite reason. To understand the system's true behavior, you need to run multiple replications.
+
+Execute your 50-week simulation twenty-five times, each with a fresh set of random numbers. The easiest way to do this is to generate random numbers once, copy them, and paste as values to freeze them for replication 1. Then generate a new set for replication 2, and so on. Record the Fill Rate from each run in a separate "Experiments" table.
+
+Now comes the statistical analysis. Calculate the mean Fill Rate across all 25 replications—this gives you the expected performance. Compute the standard deviation to understand how much variability exists; high variability means the policy is risky. Note the minimum and maximum values to identify best-case and worst-case scenarios. Finally, create a histogram with 1% bins to visualize the distribution. How often does the Fill Rate fall below 95%? This histogram will be crucial evidence for your recommendations.
+
+## Part 3: Policy Optimization
+
+Now compare your baseline results with management's target of 95% Fill Rate. Does the current policy ($S=1$) meet this target consistently? If your mean Fill Rate is below 95%, or if too many replications fall short, you'll need to find a better policy.
+
+The most direct approach is to increase the Order-Up-To level. Create additional worksheets to test $S=2$, $S=3$, and so on. For each configuration, repeat the replication study with 25 runs. This is tedious but necessary—you're searching for the minimum inventory level that reliably meets the service target.
+
+What does "reliably" mean? Two criteria: first, the average Fill Rate across replications should be at least 95%. Second, the vast majority of individual replications (say, 95% of them) should also hit the 95% mark. This gives you confidence that the policy will perform well in practice, not just on average.
+
+Keep in mind the cost implications. Higher $S$ means more inventory sitting on shelves, which ties up capital and incurs holding costs. Your recommendation should balance service quality against inventory investment—find the minimum $S$ that does the job.
+
+## Part 4: Sensitivity Analysis - Review Frequency
+
+Holding more inventory isn't the only way to improve service. Management has asked you to explore an alternative: reviewing inventory more frequently. Instead of checking stock once a week, what if we checked every four days $(R=4)$? Or every two days $(R=2)$?
+
+Test these scenarios while keeping $S=1$ and the 2-day lead time constant. For each review frequency, run your replication study and observe how Fill Rate performance changes. You'll likely see improvement—more frequent reviews mean orders are placed sooner when stock runs low, reducing the chance of stockouts.
+
+But there's no free lunch. More frequent reviews mean more labor (someone has to count the inventory), more administrative burden (entering orders into the system), and potentially higher coordination costs with suppliers. Compare this trade-off carefully: is it cheaper to hold an extra unit of inventory, or to review twice as often? Which approach is more practical operationally? Your recommendation should weigh these factors thoughtfully.
+
+## Part 5: Strategic Recommendations
+
+You've built the model, run the experiments, and analyzed the results. Now it's time to synthesize everything into actionable recommendations for *Corporación Industrial del Turia*'s management.
+
+Start by clearly stating your recommended policy configuration. Should they increase $S$? Change the review frequency? Keep everything as is? Whatever you propose, back it up with statistical evidence from your simulation study. Show the data that demonstrates your policy will consistently meet the 95% Fill Rate target.
+
+Discuss the trade-offs involved in your recommendation. If you're proposing higher inventory levels, acknowledge the increased holding costs—more capital tied up, more warehouse space needed, higher risk of obsolescence. If you're recommending more frequent reviews, discuss the administrative burden and labor costs. And don't forget the cost of *not* meeting the target: lost sales and potential damage to this critical customer relationship.
+
+Are there implementation challenges? Maybe the warehouse staff can't realistically count inventory every two days. Maybe the supplier can't handle more frequent small orders. Think through the practical aspects.
+
+Finally, consider alternative scenarios. Under what conditions might a different policy make more sense? If demand patterns change, if lead times shorten, if holding costs increase significantly—how should the policy adapt? This forward-thinking perspective will strengthen your analysis considerably.
+
+::: {.callout-tip}
+## Formatting Guidelines
+
+- Use professional formatting in the Report sheet: clear headings, readable fonts, appropriate use of tables and charts.
+- Ensure all formulas are properly documented and error-free.
+- Use named ranges for key parameters ($S$, $R$, lead time) to improve clarity.
+- Include chart titles, axis labels, and legends where appropriate.
+- Add brief notes or comments to explain complex formulas or logic.
+:::
+
+# Deliverables {#sec-deliverables}
+
+Teams must submit **one Excel Workbook** (`.xlsx` file) via the course platform before the deadline. This workbook must contain all your work organized across multiple sheets.
+
+## Workbook Structure
+
+Your Excel file must include the following sheets, properly labeled and organized:
+
+**Sheet 1: Report**
+
+This sheet serves as your technical report and must contain a professional written analysis with the following sections:
+
+1. **Executive Summary**
+   - Brief problem overview and context.
+   - Key findings and primary recommendation.
+   - Expected impact on service level and inventory investment.
+
+2. **Methodology**
+   - Description of the simulation model architecture.
+   - Explanation of the demand generation mechanism.
+   - Validation procedures and results.
+   - Replication strategy and sample size justification.
+
+3. **Results and Analysis**
+   - Baseline performance assessment ($R=5$, $S=1$) policy: statistical summary (mean, std dev, min, max Fill Rate) and performance distribution histogram.
+   - Policy optimization results: comparative analysis of different $S$ levels with statistical evidence of meeting the 95% target.
+   - Sensitivity analysis: impact of review $R$ frequency variations and comparative evaluation of alternative strategies.
+
+4. **Recommendations and Conclusions**
+   - Recommended policy with clear justification.
+   - Discussion of trade-offs and limitations.
+   - Implementation considerations and suggestions for future improvements.
+
+**Subsequent Sheets: Simulation Models and Analysis**
+
+- **Baseline Simulation** ($R=5$, $S=1$): Your main simulation model with 350 days.
+- **Alternative Policies** ($S=2, S=3$, etc.): Additional sheets testing different Order-Up-To levels.
+- **Sensitivity Analysis**: Sheets testing different review frequencies ($R=2, R=4$).
+- **Supporting Charts**: Histograms, comparative graphs, and other visualizations referenced in your report.
+
+## Evaluation Criteria
+
+Your work will be evaluated according to the following rubric (10 points total):
+
+: Evaluation Rubric {#tbl-rubric}
+
+| **Criterion** | **Weight** | **Insufficient (0)** | **Fair (5)** | **Good (8)** | **Excellent (10)** |
+|:--------------|:----------:|:---------------------------|:-------------------|:-------------------|:-----------------------|
+| **Simulation Tool** | 25% | Model does not exist or has fundamental errors that prevent execution | Model runs but contains significant logical errors or missing components | Model is correctly implemented and validated, works according to specifications | Model is exemplary with sophisticated features, clear documentation, and robust validation |
+| **Experiments** | 25% | Statistical analysis is missing or fundamentally incorrect | Basic statistics calculated but with errors or incomplete coverage | All required statistics correctly calculated and presented | Comprehensive statistical analysis with additional insights, professional visualization |
+| **Current Situation Analysis** | 25% | No analysis provided or analysis is superficial and unfounded | Basic description of findings with limited or weak recommendations | Clear analysis of current situation with sound, well-justified recommendations | Exceptional analysis with deep insights, multiple scenarios, and compelling, data-driven recommendations |
+| **Calibration of the Model** | 25% | No calibration attempt or methodology is absent | Basic sensitivity analysis with limited discussion of alternatives | Systematic evaluation of (R, S) combinations with clear trade-off analysis and justified recommendations | Comprehensive optimization study with sophisticated analysis, cost-benefit considerations, implementation roadmap, and strategic insights |
+
+\newpage
+
+# Appendix: Technical Guide for Excel Implementation {#sec-appendix}
+
+This appendix provides detailed implementation guidance for constructing your simulation model. Follow @tbl-sim-columns specifications carefully to ensure your model operates correctly.
+
+: Simulation Column Specifications {#tbl-sim-columns}
+
+| **Column** | **Description** | **Formula** |
+|:-----------|:----------------|:-----------|
+| **Period** | Running counter from 1 to 350 representing each day of the simulation | `=ROW()-1` (if starting at row 2) |
+| **Week** | Week number derived from the period (e.g., days 1-5 = week 1, days 6-10 = week 2) | `=CEILING(period/5,1)` or `=ROUNDUP(period/5,0)` |
+| **Day** | Day number within each week (1-5, where 1=Monday and 5=Friday) | `=MOD(period-1,5)+1` |
+| **Random** | Generate a random number uniformly distributed between 0 and 1 | `=RAND()` |
+| **P(D)=FALSE** | Daily demand generation: if random < 0.1 (initial average daily demand), then 1 unit; otherwise 0 | `=IF(random < 0.1, 1, 0)` |
+| **Order Quantity** | Order placed on Monday to raise inventory to level $S$; 0 otherwise | `=IF(AND(day=1, inventory < S), S - inventory, 0)` |
+| **Receipts (in the day)** | Orders placed 2 days prior arrive today (Monday order arrives Wednesday) | `=IF(AND(day=3, period>2), INDEX(Order_Quantity, period-2), 0)` |
+| **On-Stock (in the day)** | Units that became available from previous day's receipts | `=IF(period>1, INDEX(Receipts, period-1), 0)` |
+| **Next Service Units** | Available inventory to serve demand (previous inventory + on-stock) | `=inventory_previous_day + on_stock` |
+| **Serve Units** | Units actually served (minimum of demand and available inventory) | `=MIN(requirement, next_service)` |
+| **Inventory** | Ending inventory after serving demand (never negative) | `=MAX(0, next_service - serve_units)` |
+
+In addition to the basic functions of MS Excel®, you need to know @tbl-functions functions to perform this activity.
+
+: Essential Excel Functions for Inventory Simulation {#tbl-functions}
+
+| Function                  | Description                                                                 |
+|---------------------------|-----------------------------------------------------------------------------|
+| `RAND()`                  | Generates a random number between 0 and 1.                                 |
+| `SUM(range)`              | Adds all the numbers in a range of cells.                                  |
+| `AVERAGE(range)`          | Calculates the arithmetic mean of a range of cells.                        |
+| `STDEV.S(range)`          | Computes the sample standard deviation for a dataset.                      |
+| `MIN(range)`              | Returns the smallest value in a set of values.                             |
+| `MAX(range)`              | Returns the largest value in a set of values.                              |
+| `IF(logical_test, value_if_true, value_if_false)` | Returns one value if a condition is true, another if false.               |
+| `COUNTIF(range, criteria)`| Counts the number of cells that meet a specified criterion.                |
+| Special Paste → Paste Values | Pastes only the values, not formulas or formatting (Edit menu).           |
+
+::: {.callout-tip}
+## Implementation Strategy
+
+1. **Build incrementally:** Start with days 1-7 to debug the logic before extending to 350 days.
+2. **Use named ranges:** Define names for parameters like `S`, `LeadTime` for easier formula management.
+3. **Conditional formatting:** Highlight stockout events (red) and order placements (green) for visual verification.
+4. **Data validation:** Ensure inventory never goes negative and Fill Rate is between 0-100%.
+:::
+
+
+::: {.callout-note}
+- To freeze random values for replication analysis, copy the Random column and paste as values after initial generation.
+- Inventory values must never be negative; use `MAX(0, ...)` to enforce this constraint.
+- The 2-day lead time means orders placed on Monday (day=1) arrive on Wednesday (day=3) and become available for service on Thursday.
+- If the Data Analysis Add-in is not available in Excel, you must activate it by clicking the top left button, Excel Options, Add-ins, Manage Excel Add-ins, click the Go button, select tools for analysis, and accept.
+:::
+

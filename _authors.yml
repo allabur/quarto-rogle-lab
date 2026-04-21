@@ -1,0 +1,89 @@
+author:
+  - id: allabur
+    number: 1
+    name:
+      given: "Alberto"
+      family: "Lacort"
+      literal: "Alberto Lacort"
+      dropping-particle: string
+      non-dropping-particle: string
+    url: github.com/allabur
+    email: allabur@upv.es
+    phone: "+34 677 123 416"
+    degrees:
+      - MsSc
+    orcid: "0000-0001-7571-0494"
+    note: "Author note"
+    acknowledgements: "Acknowledgements text"
+    attributes:
+      corresponding: true
+      equal-contributor: false
+      deceased: false
+    roles:
+      - writing – original draft
+      - writing – review & editing
+      - formal analysis
+      - funding acquisition
+      - conceptualization
+      - data curation
+      - investigation
+      - methodology
+      - project administration
+      - resources
+      - software
+      - validation
+      - visualization
+    affiliations:
+      - ref: upv
+      - ref: polymtl
+  - id: juma2
+    number: 2
+    name:
+      given: "Julien"
+      family: "Maheut"
+      literal: "Julien Maheut"
+    email: juma2@upv.es
+    orcid: "0000-0002-5796-9053"
+    roles:
+      - supervision
+      - funding acquisition
+      - project administration
+    affiliations:
+      - ref: upv
+  - id: nadia.lahrichi
+    number: 3
+    name:
+      given: "Nadia"
+      family: "Lahrichi"
+      literal: "Nadia Lahrichi"
+    email: nadia.lahrichi@polymtl.ca
+    orcid: "0000-0002-9185-9077"
+    roles:
+      - supervision
+      - funding acquisition
+      - project administration
+    affiliations:
+      - ref: polymtl
+affiliations:
+  - id: upv
+    number: 1
+    name: Universitat Politècnica de València
+    department: Departamento de Organización de Empresas
+    group: ROGLE
+    address: Camino de Vera, s/n
+    city: València
+    region: València
+    country: Spain
+    postal-code: 46022
+    url: "https://upv.es"
+  - id: polymtl
+    number: 2
+    name: Polytechnique Montréal
+    department: Département de mathématiques et de génie industriel
+    group: CIRRELT
+    address: 2900 Boulevard Édouard-Montpetit
+    city: Montréal
+    region: Québec
+    country: Canada
+    postal-code: H3T 1J4
+    url: "https://polymtl.ca"

@@ -1,0 +1,66 @@
+meta:
+  name:
+    full: Universitat Politècnica de València
+    short: UPV
+  link: "https://upv.es"
+
+logo:
+  images:
+    upv: assets/logo-upv.svg
+    upv-light: assets/logo-UPV-light.svg
+    doe: assets/doe-logo.png
+    rogle: assets/rogle-logo.png
+  small: rogle
+  medium: upv
+  large: upv
+
+color:
+  palette:
+    upv: "#5B6770"
+    grey-UPV-light: "#5C6368"
+    grey-UPV: "#424A50"
+    grey-UPV-dark: "#3F4444"
+    grey-darkest: "#363636"
+    grey-dark: "#585B5B"
+    grey-medium: "#CFCFCF"
+    grey-light: "#F1F1F1"
+    black: "#111111"
+    white: "#FFFFFF"
+    red: "#E5554F"
+    red-dark: "#D73333"
+    red-darkest: "#A40E0E"
+    yellow: "#FFD100"
+    yellow-dark: "#FAA500"
+    yellow-darkest: "#92540C"
+    blue: "#59CBE8"
+    blue-dark: "#338FC2"
+    blue-darkest: "#054D82"
+  foreground: black
+  background: white
+  primary: grey-UPV
+  secondary: red
+  tertiary: blue
+  success: "#28A745"
+  info: blue
+  warning: yellow
+  danger: red
+  light: grey-UPV-light
+  dark: grey-UPV-dark
+# typography:
+#   fonts:
+#     - family: Inter
+#       source: google
+#     - family: Poppins
+#       source: google
+#   base:
+#     family: Inter
+#     weight: 400
+
+# defaults:
+#   shiny:
+#     theme:
+#       preset: shiny
+#       defaults:
+#         bslib-dashboard-design: false
+#       rules: |
+#         .navbar-brand { color: $brand-pink }

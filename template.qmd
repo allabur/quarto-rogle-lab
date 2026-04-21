@@ -1,0 +1,116 @@
+---
+# =============================================================================
+# UPV LAB ASSIGNMENT — STARTER TEMPLATE
+# =============================================================================
+# Duplica este archivo por cada nueva práctica, rellena los metadatos y
+# escribe el enunciado en el cuerpo.
+#
+#   quarto render mi-practica.qmd --to upv-lab-pdf
+#   quarto render mi-practica.qmd --to upv-lab-html
+# =============================================================================
+
+title: "Título de la práctica"
+subtitle: "Subtítulo opcional"
+subject: "Nombre de la asignatura"      # aparece en la cabecera de cada página
+
+# --- Autor(es) ---------------------------------------------------------------
+author:
+  - id: allabur
+    name:
+      given: "Alberto"
+      family: "Lacort"
+      literal: "Alberto Lacort"
+    email: allabur@upv.es
+    orcid: "0000-0001-7571-0494"
+    affiliations:
+      - ref: upv
+
+affiliations:
+  - id: upv
+    name: "Universitat Politècnica de València"
+    department: "Departamento de Organización de Empresas"
+    city: "València"
+    country: "España"
+    url: "https://upv.es"
+
+date: today
+date-format: long
+lang: es
+
+# --- Licencia / pie ----------------------------------------------------------
+license:
+  name: "CC BY-NC-SA"      # CC BY | CC BY-SA | CC BY-ND | CC BY-NC | CC BY-NC-SA | CC BY-NC-ND | CC0
+
+copyright:
+  holder: "Alberto Lacort"
+  year: 2026
+
+# --- Cita (opcional — genera un recuadro "Cómo citar" al inicio) -------------
+# Comenta o borra este bloque si no quieres cita.
+# citation:
+#   container-title: "RIUNET Repositorio UPV"
+#   issued:
+#     year: 2026
+#   doi: "10.5555/example"
+
+# --- Resumen -----------------------------------------------------------------
+abstract: |
+  Escribe aquí un resumen breve (3–5 líneas) con el contexto de la práctica,
+  los objetivos de aprendizaje y el entregable esperado.
+
+keywords:
+  - palabra-clave-1
+  - palabra-clave-2
+---
+
+# Introducción {#sec-intro}
+
+Describe el contexto del caso y los objetivos de aprendizaje.
+
+::: {.callout-important}
+## Objetivos de aprendizaje
+
+1. Primer objetivo.
+2. Segundo objetivo.
+3. Tercer objetivo.
+:::
+
+::: {.callout-warning}
+## Detalles de la práctica
+
+**Duración:** 3 horas · **Modalidad:** trabajo en equipo
+
+**Requisitos previos:** conocimientos básicos de …
+
+**Recursos:** plantilla de Excel / Python / R provista en el aula.
+:::
+
+# Enunciado {#sec-enunciado}
+
+Redacta el caso aquí.
+
+# Actividades {#sec-actividades}
+
+## Parte 1: …
+
+## Parte 2: …
+
+# Entregables {#sec-entregables}
+
+Indica qué debe entregar el alumno, en qué formato y a través de qué plataforma.
+
+# Criterios de evaluación {#sec-evaluacion}
+
+| Criterio | Peso | Descripción |
+|----------|:----:|-------------|
+| Criterio 1 | 25% | … |
+| Criterio 2 | 25% | … |
+| Criterio 3 | 25% | … |
+| Criterio 4 | 25% | … |
+
+: Rúbrica de evaluación {#tbl-rubric}
+
+# Referencias {.unnumbered}
+
+::: {#refs}
+:::

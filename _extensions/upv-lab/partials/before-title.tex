@@ -1,0 +1,179 @@
+% Header/footer setup and citation callout for the upv-lab format.
+% This is a Pandoc template partial: $variables$ are resolved before LaTeX runs.
+
+\usepackage[skins]{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{ifthen}
+\usepackage{iflang}
+
+% ============================================================================
+% CITATION CALLOUT
+% ============================================================================
+
+\providecolor{quarto-callout-cite-color}{HTML}{6c757d}
+\providecolor{quarto-callout-cite-color-frame}{HTML}{6c757d}
+
+% Fallback: no-op when citation metadata is absent
+\providecommand{\citationcallout}{}
+
+$if(citation)$
+\renewcommand{\citationcallout}{%
+  \begin{tcolorbox}[
+      enhanced jigsaw,
+      colframe=quarto-callout-cite-color-frame,
+      colback=white,
+      colbacktitle=quarto-callout-cite-color!10!white,
+      coltitle=black,
+      titlerule=0mm,
+      opacitybacktitle=0.6,
+      opacityback=0,
+      leftrule=.75mm,
+      rightrule=.15mm,
+      toprule=.15mm,
+      bottomrule=.15mm,
+      left=2mm,
+      top=1.5mm,
+      bottom=1.5mm,
+      arc=.35mm,
+      toptitle=1mm,
+      bottomtitle=1mm,
+      title={\textcolor{quarto-callout-cite-color}{\footnotesize \faQuoteLeft}\hspace{0.5em}{\footnotesize \iflanguage{spanish}{Cómo citar}{How to cite}}}
+    ]
+    \footnotesize
+    $if(authors)$$for(authors)$$it.name.family$, $it.name.given$$sep$; $endfor$ $endif$%
+    $if(citation.issued.date-parts)$
+      ($for(citation.issued.date-parts)$$for(it)$$it$$sep$/$endfor$$endfor$).
+    $elseif(citation.issued)$
+      ($citation.issued$).
+    $else$
+      ($date$).
+    $endif$%
+    $if(citation.title)$$citation.title$.$else$$title$.$endif$%
+    $if(subject)$ \textit{$subject$}.$endif$%
+    $if(citation.container-title)$ \textit{$citation.container-title$}$endif$%
+    $if(citation.volume)$, \textit{$citation.volume$}$if(citation.issue)$($citation.issue$)$endif$$endif$%
+    $if(citation.doi)$. \href{https://doi.org/$citation.doi$}{https://doi.org/$citation.doi$}$endif$%
+  \end{tcolorbox}%
+}
+$endif$
+
+% ============================================================================
+% LICENSE LOGIC
+% ============================================================================
+
+\newcommand{\quartoLicenseName}{}
+\newcommand{\quartoLicenseLogoPath}{}
+\newcommand{\quartoLicenseUrl}{}
+
+$if(license)$
+$if(license.name)$
+\renewcommand{\quartoLicenseName}{$license.name$}
+$else$
+\renewcommand{\quartoLicenseName}{$license$}
+$endif$
+
+$if(license.url)$
+\renewcommand{\quartoLicenseUrl}{$license.url$}
+$endif$
+
+\ifthenelse{\equal{\quartoLicenseName}{CC BY}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc-by.png}}{}
+\ifthenelse{\equal{\quartoLicenseName}{CC BY-SA}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc-by-sa.png}}{}
+\ifthenelse{\equal{\quartoLicenseName}{CC BY-ND}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc-by-nd.png}}{}
+\ifthenelse{\equal{\quartoLicenseName}{CC BY-NC}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc-by-nc.png}}{}
+\ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-SA}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc-by-nc-sa.png}}{}
+\ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-ND}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc-by-nc-nd.png}}{}
+\ifthenelse{\equal{\quartoLicenseName}{CC0}}{
+  \renewcommand{\quartoLicenseLogoPath}{_extensions/upv-lab/resources/cc-icons/cc0.png}}{}
+
+\ifthenelse{\equal{\quartoLicenseUrl}{}}{%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by/4.0/}}{}
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-SA}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by-sa/4.0/}}{}
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-ND}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by-nd/4.0/}}{}
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by-nc/4.0/}}{}
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-SA}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by-nc-sa/4.0/}}{}
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-ND}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by-nc-nd/4.0/}}{}
+  \ifthenelse{\equal{\quartoLicenseName}{CC0}}{
+    \renewcommand{\quartoLicenseUrl}{https://creativecommons.org/publicdomain/zero/1.0/}}{}
+}{}
+$endif$
+
+\newcommand{\quartoFooterLeft}{%
+  \small
+  $if(license)$
+  $if(license.logo)$
+    $if(license.url)$
+      \href{$license.url$}{\raisebox{-0.3\height}{\includegraphics[height=1.2em]{$license.logo$}}}\hspace{0.5em}%
+    $else$
+      \raisebox{-0.3\height}{\includegraphics[height=1.2em]{$license.logo$}}\hspace{0.5em}%
+    $endif$
+  $else$
+    \ifthenelse{\equal{\quartoLicenseLogoPath}{}}{%
+      License: \ifthenelse{\equal{\quartoLicenseUrl}{}}{\quartoLicenseName}{\href{\quartoLicenseUrl}{\quartoLicenseName}} \ | %
+    }{%
+      \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
+        \raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}%
+      }{%
+        \href{\quartoLicenseUrl}{\raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}}%
+      }\hspace{0.5em}%
+    }%
+  $endif$
+  $endif$%
+  $if(copyright)$\textcopyright\ $copyright.year$ $copyright.holder$$endif$%
+}
+
+% ============================================================================
+% HEADER / FOOTER (fancyhdr)
+% ============================================================================
+
+\setlength{\footskip}{15mm}
+\setlength{\headheight}{32pt}
+\setlength{\headsep}{10mm}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\lhead{%
+  \begin{tabular}[b]{l}
+    \textbf{\small $if(subject)$$subject$$else$$if(course.subject)$$course.subject$$endif$$endif$} \\
+    \small $title$
+  \end{tabular}
+}
+
+\IfFileExists{_extensions/upv-lab/resources/logos/rogle-logo.png}{%
+  \rhead{\includegraphics[height=0.5cm]{_extensions/upv-lab/resources/logos/rogle-logo.png}}%
+}{}
+
+\lfoot{\quartoFooterLeft}
+\rfoot{\small \thepage\ / \pageref{LastPage}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \renewcommand{\footrulewidth}{0.4pt}%
+  \lhead{%
+    \begin{tabular}[b]{l}
+      \textbf{\small $if(subject)$$subject$$else$$if(course.subject)$$course.subject$$endif$$endif$} \\
+      \small $title$
+    \end{tabular}%
+  }%
+  \IfFileExists{_extensions/upv-lab/resources/logos/rogle-logo.png}{%
+    \rhead{\includegraphics[height=0.5cm]{_extensions/upv-lab/resources/logos/rogle-logo.png}}%
+  }{}%
+  \lfoot{\quartoFooterLeft}%
+  \rfoot{\small \thepage\ / \pageref{LastPage}}%
+}

@@ -1,0 +1,78 @@
+/*-- scss:defaults --*/
+
+// UPV palette
+$upv-grey:        #424A50;
+$upv-grey-light:  #5C6368;
+$upv-grey-dark:   #3F4444;
+$upv-red:         #E5554F;
+$upv-yellow:      #FFD100;
+$upv-blue:        #59CBE8;
+$upv-blue-dark:   #338FC2;
+$grey-light:      #F1F1F1;
+$grey-medium:     #CFCFCF;
+
+$primary:   $upv-grey;
+$secondary: $upv-red;
+$link-color: $upv-blue-dark;
+
+$body-color: #222;
+$body-bg:    #fff;
+
+$font-family-sans-serif: "Inter", "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:      "Source Serif Pro", Georgia, serif;
+
+$h1-font-size: 2rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.25rem;
+
+/*-- scss:rules --*/
+
+.title-banner {
+  background: $upv-grey;
+  color: #fff;
+  padding: 1.5rem 1rem;
+}
+
+h1, h2, h3 {
+  font-family: $font-family-sans-serif;
+  color: $upv-grey;
+  letter-spacing: -0.01em;
+}
+
+h1.title {
+  border-bottom: 2px solid $upv-grey-light;
+  padding-bottom: 0.4em;
+  margin-bottom: 1rem;
+}
+
+.callout {
+  border-left-width: 4px;
+  border-radius: 4px;
+}
+
+.callout-important { border-left-color: $upv-red;     }
+.callout-warning   { border-left-color: $upv-yellow;  }
+.callout-tip       { border-left-color: $upv-blue;    }
+.callout-note      { border-left-color: $upv-grey-light; }
+
+code {
+  background-color: $grey-light;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+table {
+  font-size: 0.95em;
+  thead {
+    background-color: $grey-light;
+    color: $upv-grey-dark;
+  }
+}
+
+.course-meta {
+  background: $grey-light;
+  border-left: 4px solid $upv-blue-dark;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.95em;
+}
