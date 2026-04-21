@@ -1,8 +1,10 @@
 project:
   type: default
+  pre-render: ./pre-render.sh
   render:
     - "*.qmd"
+    - "example/*.qmd"
 
 format:
-  upv-lab-pdf:
+  rogle-lab-pdf:
     pdf-engine: xelatex

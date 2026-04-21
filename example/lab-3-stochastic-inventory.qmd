@@ -1,6 +1,6 @@
 ---
 # ============================================================================
-# EXAMPLE — Lab 3 statement using the upv-lab extension
+# EXAMPLE — Lab 3 statement using the rogle-lab extension
 # ============================================================================
 
 title: "Inventory Models with Stochastic Demand: Periodic Review Model"
@@ -17,8 +17,6 @@ author:
       dropping-particle: string
       non-dropping-particle: string
     url: github.com/allabur
-    email: allabur@upv.es
-    phone: "+34 677 123 416"
     degrees:
       - MsSc
     orcid: "0000-0001-7571-0494"
@@ -51,7 +49,6 @@ author:
       given: "Julien"
       family: "Maheut"
       literal: "Julien Maheut"
-    email: juma2@upv.es
     orcid: "0000-0002-5796-9053"
     roles:
       - supervision

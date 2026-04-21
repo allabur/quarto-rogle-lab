@@ -1,4 +1,4 @@
-# quarto-upv-lab
+# quarto-rogle-lab
 
 Plantilla Quarto reutilizable para enunciados de **prácticas, notas técnicas y casos de estudio** en asignaturas de la UPV.
 
@@ -10,19 +10,19 @@ Entrega un PDF y un HTML con portada UPV, metadatos de asignatura (código, nº 
 
 ```
 article/
-├── _extensions/upv-lab/            # La extensión Quarto (formato custom upv-lab-pdf / upv-lab-html)
+├── _extensions/rogle-lab/          # La extensión Quarto (formato rogle-lab-pdf / rogle-lab-html)
 │   ├── _extension.yml
-│   ├── partials/before-title.tex   # Cabecera/pie fancyhdr + citation callout
+│   ├── partials/                   # title.tex, before-title.tex (fancyhdr + citation callout)
 │   ├── includes/                   # packages.tex, colors.tex, citation-callout.tex
-│   ├── resources/                  # Logos UPV/ROGLE y iconos Creative Commons (PNG)
-│   └── styles/upv-lab.scss         # Estilos HTML
-├── template.qmd                    # Punto de partida: duplica este por cada práctica
-├── lab-3-stochastic-inventory.qmd  # Ejemplo: práctica real de inventario
-├── article-supply-chain.qmd        # Ejemplo: nota técnica
+│   ├── resources/                  # Logos UPV/ROGLE e iconos Creative Commons (PNG)
+│   └── styles/rogle-lab.scss       # Estilos HTML
+├── example/
+│   ├── lab-3-stochastic-inventory.qmd   # Ejemplo: práctica de inventario
+│   └── article-supply-chain.qmd         # Ejemplo: nota técnica
+├── template.qmd                    # Punto de partida: duplica por cada práctica
 ├── _quarto.yml                     # Proyecto Quarto
-├── _brand.yml, _authors.yml        # Marca UPV y autores habituales
-├── assets/                         # Logos SVG/PNG sueltos
-└── archives/                       # Versiones anteriores (no usar)
+├── pre-render.sh                   # Copia recursos al renderizar desde example/
+└── README.md
 ```
 
 ## 2 · Uso
@@ -34,12 +34,12 @@ Los archivos `.qmd` deben estar en la **raíz del proyecto** (junto a `_extensio
 ```bash
 cd article/
 cp template.qmd lab-04-nombre.qmd        # un archivo por práctica
-# edita la YAML del archivo: subject, title, author, license…
-quarto render lab-04-nombre.qmd --to upv-lab-pdf
-quarto render lab-04-nombre.qmd --to upv-lab-html
+# edita la YAML: subject, title, author, license…
+quarto render lab-04-nombre.qmd --to rogle-lab-pdf
+quarto render lab-04-nombre.qmd --to rogle-lab-html
 ```
 
-O bien renderiza todo el proyecto de una vez:
+O renderiza todo el proyecto (incluidos los ejemplos de `example/`):
 
 ```bash
 quarto render
@@ -49,7 +49,7 @@ quarto render
 
 ```bash
 cd /ruta/a/otro/proyecto
-quarto add allabur/quarto-upv-lab        # cuando lo publiques en GitHub
+quarto add allabur/quarto-rogle-lab        # cuando lo publiques en GitHub
 # o, usando una ruta local mientras se desarrolla:
 quarto add /ruta/a/templates/article
 ```
@@ -59,7 +59,7 @@ Después, en tu `.qmd`:
 ```yaml
 ---
 title: "Mi práctica"
-format: upv-lab-pdf
+format: rogle-lab-pdf
 course:
   subject: "Gestión de la cadena de suministro"
   lab-number: "2"
@@ -71,10 +71,10 @@ course:
 Para que alumnos o colaboradores arranquen desde cero un repo basado en la plantilla:
 
 ```bash
-quarto use template allabur/quarto-upv-lab
+quarto use template allabur/quarto-rogle-lab
 ```
 
-Esto crea una carpeta nueva con `template.qmd` y `_extensions/upv-lab/` ya configurados.
+Esto crea una carpeta nueva con `template.qmd` y `_extensions/rogle-lab/` ya configurados.
 
 ## 3 · Metadatos soportados en la YAML
 
@@ -99,17 +99,17 @@ Esto crea una carpeta nueva con `template.qmd` y `_extensions/upv-lab/` ya confi
 
 | Quiero cambiar… | Edita… |
 |-----------------|--------|
-| Paleta de colores | `_extensions/upv-lab/includes/colors.tex` |
-| Tipografías | `_extensions/upv-lab/includes/fonts.tex` |
-| Márgenes, interlineado | `_extensions/upv-lab/includes/layout.tex` |
-| Logos de cabecera | Reemplaza los PNG en `_extensions/upv-lab/resources/logos/` |
-| Portada (qué aparece, en qué orden) | `_extensions/upv-lab/partials/before-body.tex` |
+| Paleta de colores | `_extensions/rogle-lab/includes/colors.tex` |
+| Tipografías | `_extensions/rogle-lab/includes/fonts.tex` |
+| Márgenes, interlineado | `_extensions/rogle-lab/includes/layout.tex` |
+| Logos de cabecera | Reemplaza los PNG en `_extensions/rogle-lab/resources/logos/` |
+| Portada (qué aparece, en qué orden) | `_extensions/rogle-lab/partials/before-body.tex` |
 | Qué se muestra en el pie | Cambia `footer.content` en la YAML del documento |
-| Estilos HTML | `_extensions/upv-lab/styles/upv-lab.scss` |
+| Estilos HTML | `_extensions/rogle-lab/styles/rogle-lab.scss` |
 
 ## 6 · Publicar como template
 
-Cuando la extensión esté estable, súbela a GitHub como `allabur/quarto-upv-lab` con un tag de versión (`v1.0.0`). A partir de ahí, cualquiera puede instalarla con `quarto add` o `quarto use template`.
+Cuando la extensión esté estable, súbela a GitHub como `allabur/quarto-rogle-lab` con un tag de versión (`v1.0.0`). A partir de ahí, cualquiera puede instalarla con `quarto add` o `quarto use template`.
 
 ## Licencia
 

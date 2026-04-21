@@ -44,7 +44,7 @@ contributes:
     html:
       theme:
         - default
-        - styles/upv-lab.scss
+        - styles/rogle-lab.scss
       toc-title: "Índice"
       code-fold: false
       code-tools: true

@@ -22,3 +22,13 @@ __pycache__/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Claude session data
+.claude/
+
+# Quarto build artifacts
+template_files/
+example/_extensions/
+
+# Local archives and work-in-progress
+archives/

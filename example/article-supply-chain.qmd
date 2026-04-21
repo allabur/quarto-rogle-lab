@@ -1,6 +1,6 @@
 ---
 # ============================================================================
-# EXAMPLE — Technical note / case study rendered with the upv-lab extension
+# EXAMPLE — Technical note / case study rendered with the rogle-lab extension
 # ============================================================================
 
 title: "Advanced Supply Chain Optimization: A Practical Case Study"
@@ -22,8 +22,6 @@ author:
       dropping-particle: string
       non-dropping-particle: string
     url: github.com/allabur
-    email: allabur@upv.es
-    phone: "+34 677 123 416"
     degrees:
       - MsSc
     orcid: "0000-0001-7571-0494"
@@ -56,7 +54,6 @@ author:
       given: "Julien"
       family: "Maheut"
       literal: "Julien Maheut"
-    email: juma2@upv.es
     orcid: "0000-0002-5796-9053"
     roles:
       - supervision
@@ -70,7 +67,6 @@ author:
       given: "Nadia"
       family: "Lahrichi"
       literal: "Nadia Lahrichi"
-    email: nadia.lahrichi@polymtl.ca
     orcid: "0000-0002-9185-9077"
     roles:
       - supervision

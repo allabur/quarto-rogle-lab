@@ -1,12 +1,12 @@
 ---
 # =============================================================================
-# UPV LAB ASSIGNMENT — STARTER TEMPLATE
+# ROGLE LAB ASSIGNMENT — STARTER TEMPLATE
 # =============================================================================
 # Duplica este archivo por cada nueva práctica, rellena los metadatos y
 # escribe el enunciado en el cuerpo.
 #
-#   quarto render mi-practica.qmd --to upv-lab-pdf
-#   quarto render mi-practica.qmd --to upv-lab-html
+#   quarto render mi-practica.qmd --to rogle-lab-pdf
+#   quarto render mi-practica.qmd --to rogle-lab-html
 # =============================================================================
 
 title: "Título de la práctica"
@@ -20,7 +20,6 @@ author:
       given: "Alberto"
       family: "Lacort"
       literal: "Alberto Lacort"
-    email: allabur@upv.es
     orcid: "0000-0001-7571-0494"
     affiliations:
       - ref: upv
