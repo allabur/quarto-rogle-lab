@@ -64,6 +64,9 @@ $endif$
 \newcommand{\quartoLicenseName}{}
 \newcommand{\quartoLicenseLogoPath}{}
 \newcommand{\quartoLicenseUrl}{}
+\newcommand{\quartoLicenseTextFallback}{%
+  License: \ifthenelse{\equal{\quartoLicenseUrl}{}}{\quartoLicenseName}{\href{\quartoLicenseUrl}{\quartoLicenseName}} \ | %
+}
 
 $if(license)$
 $if(license.name)$
@@ -120,13 +123,17 @@ $endif$
     $endif$
   $else$
     \ifthenelse{\equal{\quartoLicenseLogoPath}{}}{%
-      License: \ifthenelse{\equal{\quartoLicenseUrl}{}}{\quartoLicenseName}{\href{\quartoLicenseUrl}{\quartoLicenseName}} \ | %
+      \quartoLicenseTextFallback%
     }{%
-      \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
-        \raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}%
+      \IfFileExists{\quartoLicenseLogoPath}{%
+        \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
+          \raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}%
+        }{%
+          \href{\quartoLicenseUrl}{\raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}}%
+        }\hspace{0.5em}%
       }{%
-        \href{\quartoLicenseUrl}{\raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}}%
-      }\hspace{0.5em}%
+        \quartoLicenseTextFallback%
+      }%
     }%
   $endif$
   $endif$%

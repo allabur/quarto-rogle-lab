@@ -78,7 +78,6 @@ article/
 │   └── article-supply-chain.qmd         # Ejemplo: nota técnica
 ├── template.qmd                    # Punto de partida: duplica por cada práctica
 ├── _quarto.yml                     # Proyecto Quarto
-├── pre-render.sh                   # Copia recursos al renderizar desde example/
 ├── .quartoignore                   # Archivos que no se copian con `quarto use template`
 └── README.md
 ```

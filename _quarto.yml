@@ -1,6 +1,5 @@
 project:
   type: default
-  pre-render: ./pre-render.sh
   render:
     - "*.qmd"
     - "example/*.qmd"

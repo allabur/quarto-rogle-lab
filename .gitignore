@@ -30,6 +30,10 @@ __pycache__/
 # Quarto build artifacts
 template_files/
 example/_extensions/
+/logos/
+/cc-icons/
+example/logos/
+example/cc-icons/
 
 # Local archives and work-in-progress
 archives/
