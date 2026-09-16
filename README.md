@@ -1,7 +1,5 @@
 # quarto-rogle-lab
 
-[![Render template](https://github.com/allabur/quarto-rogle-lab/actions/workflows/render.yml/badge.svg)](https://github.com/allabur/quarto-rogle-lab/actions/workflows/render.yml)
-
 Plantilla y extensión Quarto reutilizable para enunciados de **prácticas, notas
 técnicas y proyectos** en asignaturas de la UPV. Es la plantilla por defecto
 para nuevos enunciados.
