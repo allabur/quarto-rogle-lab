@@ -20,6 +20,9 @@ contributes:
       colorlinks: true
       keep-tex: false
 
+      filters:
+        - rogle-lab.lua
+
       geometry:
         - top=25mm
         - left=25mm

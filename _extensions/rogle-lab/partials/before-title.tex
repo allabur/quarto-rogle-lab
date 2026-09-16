@@ -80,19 +80,19 @@ $if(license.url)$
 $endif$
 
 \ifthenelse{\equal{\quartoLicenseName}{CC BY}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc-by.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc-by.png}}{}
 \ifthenelse{\equal{\quartoLicenseName}{CC BY-SA}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc-by-sa.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc-by-sa.png}}{}
 \ifthenelse{\equal{\quartoLicenseName}{CC BY-ND}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc-by-nd.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc-by-nd.png}}{}
 \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc-by-nc.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc-by-nc.png}}{}
 \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-SA}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc-by-nc-sa.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc-by-nc-sa.png}}{}
 \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-ND}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc-by-nc-nd.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc-by-nc-nd.png}}{}
 \ifthenelse{\equal{\quartoLicenseName}{CC0}}{
-  \renewcommand{\quartoLicenseLogoPath}{_extensions/rogle-lab/resources/cc-icons/cc0.png}}{}
+  \renewcommand{\quartoLicenseLogoPath}{$rogle-lab-resources-dir$cc-icons/cc0.png}}{}
 
 \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
   \ifthenelse{\equal{\quartoLicenseName}{CC BY}}{
@@ -161,8 +161,8 @@ $endif$
   \end{tabular}
 }
 
-\IfFileExists{_extensions/rogle-lab/resources/logos/rogle-logo.png}{%
-  \rhead{\includegraphics[height=0.5cm]{_extensions/rogle-lab/resources/logos/rogle-logo.png}}%
+\IfFileExists{$rogle-lab-resources-dir$logos/rogle-logo.png}{%
+  \rhead{\includegraphics[height=0.5cm]{$rogle-lab-resources-dir$logos/rogle-logo.png}}%
 }{}
 
 \lfoot{\quartoFooterLeft}
@@ -178,8 +178,8 @@ $endif$
       \small $title$
     \end{tabular}%
   }%
-  \IfFileExists{_extensions/rogle-lab/resources/logos/rogle-logo.png}{%
-    \rhead{\includegraphics[height=0.5cm]{_extensions/rogle-lab/resources/logos/rogle-logo.png}}%
+  \IfFileExists{$rogle-lab-resources-dir$logos/rogle-logo.png}{%
+    \rhead{\includegraphics[height=0.5cm]{$rogle-lab-resources-dir$logos/rogle-logo.png}}%
   }{}%
   \lfoot{\quartoFooterLeft}%
   \rfoot{\small \thepage\ / \pageref{LastPage}}%
