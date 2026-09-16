@@ -1,0 +1,4 @@
+# Quarto automatically excludes common GitHub files (.github/, .git/, README.md,
+# LICENSE) when this repo is used via `quarto use template`.
+# List here any additional repo-only files that should NOT be copied into a
+# new practica/proyecto created from this template.

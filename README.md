@@ -1,12 +1,71 @@
 # quarto-rogle-lab
 
-Plantilla Quarto reutilizable para enunciados de **prácticas, notas técnicas y casos de estudio** en asignaturas de la UPV.
+[![Render template](https://github.com/allabur/quarto-rogle-lab/actions/workflows/render.yml/badge.svg)](https://github.com/allabur/quarto-rogle-lab/actions/workflows/render.yml)
 
-Entrega un PDF y un HTML con portada UPV, metadatos de asignatura (código, nº de práctica, curso, grupo, titulación), cabecera con logos y pie con licencia / autoría / paginación.
+Plantilla y extensión Quarto reutilizable para enunciados de **prácticas, notas
+técnicas y proyectos** en asignaturas de la UPV. Es la plantilla por defecto
+para nuevos enunciados.
 
+Entrega un PDF y un HTML con portada UPV, metadatos de asignatura (código, nº
+de práctica, curso, grupo, titulación), cabecera con logos y pie con licencia
+/ autoría / paginación.
+
+## Creación de una práctica nueva
+
+Usa este repositorio como punto de partida de un proyecto nuevo:
+
+```bash
+quarto use template allabur/quarto-rogle-lab
+```
+
+Esto crea una carpeta con la extensión `rogle-lab` ya instalada en
+`_extensions/` y un `template.qmd` listo para editar como primera práctica.
+
+## Instalación en un proyecto existente
+
+Si ya tienes un proyecto Quarto y solo quieres añadir el formato:
+
+```bash
+cd /ruta/a/tu/proyecto
+quarto add allabur/quarto-rogle-lab
+```
+
+Después, en tu `.qmd`:
+
+```yaml
 ---
+title: "Mi práctica"
+format: rogle-lab-pdf
+course:
+  subject: "Gestión de la cadena de suministro"
+  lab-number: "2"
+---
+```
 
-## 1 · Estructura del repositorio
+## Uso
+
+Los formatos disponibles son `rogle-lab-pdf` y `rogle-lab-html`:
+
+```bash
+quarto render mi-practica.qmd --to rogle-lab-pdf
+quarto render mi-practica.qmd --to rogle-lab-html
+```
+
+Un archivo `.qmd` por práctica, en la raíz del proyecto (junto a
+`_extensions/`):
+
+```bash
+cp template.qmd lab-04-nombre.qmd
+# edita la YAML: subject, title, author, license…
+```
+
+O renderiza todo el proyecto (incluidos los ejemplos de `example/`):
+
+```bash
+quarto render
+```
+
+## Estructura del repositorio
 
 ```
 article/
@@ -22,61 +81,11 @@ article/
 ├── template.qmd                    # Punto de partida: duplica por cada práctica
 ├── _quarto.yml                     # Proyecto Quarto
 ├── pre-render.sh                   # Copia recursos al renderizar desde example/
+├── .quartoignore                   # Archivos que no se copian con `quarto use template`
 └── README.md
 ```
 
-## 2 · Uso
-
-### Opción A · Proyecto local
-
-Los archivos `.qmd` deben estar en la **raíz del proyecto** (junto a `_extensions/`).
-
-```bash
-cd article/
-cp template.qmd lab-04-nombre.qmd        # un archivo por práctica
-# edita la YAML: subject, title, author, license…
-quarto render lab-04-nombre.qmd --to rogle-lab-pdf
-quarto render lab-04-nombre.qmd --to rogle-lab-html
-```
-
-O renderiza todo el proyecto (incluidos los ejemplos de `example/`):
-
-```bash
-quarto render
-```
-
-### Opción B · Instalar la extensión en otro proyecto
-
-```bash
-cd /ruta/a/otro/proyecto
-quarto add allabur/quarto-rogle-lab        # cuando lo publiques en GitHub
-# o, usando una ruta local mientras se desarrolla:
-quarto add /ruta/a/templates/article
-```
-
-Después, en tu `.qmd`:
-
-```yaml
----
-title: "Mi práctica"
-format: rogle-lab-pdf
-course:
-  subject: "Gestión de la cadena de suministro"
-  lab-number: "2"
----
-```
-
-### Opción C · `quarto use template`
-
-Para que alumnos o colaboradores arranquen desde cero un repo basado en la plantilla:
-
-```bash
-quarto use template allabur/quarto-rogle-lab
-```
-
-Esto crea una carpeta nueva con `template.qmd` y `_extensions/rogle-lab/` ya configurados.
-
-## 3 · Metadatos soportados en la YAML
+## Metadatos soportados en la YAML
 
 | Bloque | Campo | Descripción |
 |--------|-------|-------------|
@@ -85,17 +94,16 @@ Esto crea una carpeta nueva con `template.qmd` y `_extensions/rogle-lab/` ya con
 | `author` / `affiliations` | Quarto estándar (`name.given`, `name.family`, `email`, `orcid`, `affiliations`) | Autores del enunciado |
 | `license` | `name` (`CC BY`, `CC BY-NC-SA`, `CC BY-NC-ND`, `CC0`…), `version`, `url` | Licencia del documento |
 | `copyright` | `holder`, `year` | Copyright del enunciado |
-| `upv-footer` | `content`: `license` \| `citation` \| `copyright` | Qué se muestra a la izquierda del pie |
-| `upv-footer` | (clave del documento, no confundir con la opción `footer` reservada por Quarto) | |
+| `upv-footer` | `content`: `license` \| `citation` \| `copyright` | Qué se muestra a la izquierda del pie (no confundir con la opción `footer`, reservada por Quarto) |
 | `citation` | CSL — `container-title`, `issued.year`, `volume`, `doi`… | Cita tipo CSL, útil para notas técnicas |
 
-## 4 · Requisitos
+## Requisitos
 
 - **Quarto** ≥ 1.4
 - **TeX Live** con `xelatex` (para PDF) — incluido en cualquier instalación estándar de TeX Live o MacTeX
 - Paquetes LaTeX: `scrlayer-scrpage`, `geometry`, `fontspec`, `graphicx`, `xcolor`, `framed`, `lastpage` (todos estándar en TeX Live)
 
-## 5 · Personalización rápida
+## Personalización rápida
 
 | Quiero cambiar… | Edita… |
 |-----------------|--------|
@@ -107,10 +115,14 @@ Esto crea una carpeta nueva con `template.qmd` y `_extensions/rogle-lab/` ya con
 | Qué se muestra en el pie | Cambia `footer.content` en la YAML del documento |
 | Estilos HTML | `_extensions/rogle-lab/styles/rogle-lab.scss` |
 
-## 6 · Publicar como template
+## Versionado
 
-Cuando la extensión esté estable, súbela a GitHub como `allabur/quarto-rogle-lab` con un tag de versión (`v1.0.0`). A partir de ahí, cualquiera puede instalarla con `quarto add` o `quarto use template`.
+Este repositorio sigue [SemVer](https://semver.org/). Cada release se marca
+con un tag `vX.Y.Z`; `quarto add`/`quarto use template` sin especificar tag
+instalan la última release. Estado actual: **v0.1.0** (primera versión
+estable de la plantilla).
 
 ## Licencia
 
-Código bajo **MIT**. Documentos generados: la licencia la define cada documento (por defecto CC BY-NC-SA 4.0).
+Código bajo **MIT** (ver `LICENSE`). Documentos generados: la licencia la
+define cada documento (por defecto CC BY-NC-SA 4.0).

@@ -4,7 +4,3 @@ project:
   render:
     - "*.qmd"
     - "example/*.qmd"
-
-format:
-  rogle-lab-pdf:
-    pdf-engine: xelatex
