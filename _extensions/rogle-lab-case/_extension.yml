@@ -1,6 +1,6 @@
 title: ROGLE Case / Informe (uso interno PDI)
 author: Alberto Lacort
-version: 0.1.0
+version: 0.2.0
 quarto-required: ">=1.4.0"
 
 # Formato de portada tipo artículo de congreso para casos docentes / notas
@@ -8,14 +8,17 @@ quarto-required: ">=1.4.0"
 # es el formato que instala `quarto use template allabur/quarto-rogle-lab`
 # para el enunciado de práctica de un alumno — ese sigue siendo la
 # extensión `rogle-lab` (formatos rogle-lab-pdf / rogle-lab-html).
+#
+# v0.2 — el diseño (portada, licencia, "Cómo citar", cabecera/pie) se
+# formaliza como clase LaTeX propia (rogle-case-upv.cls), al estilo de
+# citym-upv.cls: temas intercambiables vía rogle-case-theme-<nombre>.tex,
+# y este extension.yml solo carga la clase y traduce YAML → macros.
 
 contributes:
   formats:
     pdf:
       pdf-engine: xelatex
-      documentclass: article
-      papersize: a4
-      fontsize: 11pt
+      documentclass: rogle-case-upv
       colorlinks: true
       keep-tex: false
       toc: false
@@ -26,19 +29,12 @@ contributes:
       filters:
         - rogle-lab-case.lua
 
-      geometry:
-        - top=25mm
-        - left=25mm
-        - right=25mm
-        - bottom=35mm
-
-      include-in-header:
-        - includes/packages.tex
-        - includes/colors.tex
+      format-resources:
+        - rogle-case-upv.cls
+        - rogle-case-theme-default.tex
 
       include-before-body:
         - includes/citation-callout.tex
 
       template-partials:
         - partials/title.tex
-        - partials/before-title.tex

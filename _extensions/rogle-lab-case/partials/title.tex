@@ -1,49 +1,21 @@
-% title-case.tex — portada tipo "artículo" para el formato rogle-lab-case-pdf.
-% Uso interno PDI: casos docentes / notas técnicas depositables (RiUNET,
-% Zenodo...) — no lo usa el alumno, que sigue con title.tex / rogle-lab-pdf.
-%
-% Bloque logo (izq.) + metadatos académicos (dcha.) por encima del título,
-% y autores con afiliaciones numeradas al estilo de un artículo de congreso
-% (authblk), igual que hace citym para las actas.
+% title.tex — partial rogle-lab-case: traduce el YAML del .qmd a las macros
+% editoriales de rogle-case-upv.cls. No se escribe a mano en el manuscrito.
 
-\usepackage{etoolbox}
-\usepackage{authblk}
-\renewcommand\Authfont{\bfseries}
-\renewcommand\Affilfont{\normalfont\small}
-\setlength{\affilsep}{0.5em}
+\rogleResourcesDir{$rogle-lab-resources-dir$}
 
-\newcommand{\rogleCaseHeaderBlock}{%
-  {\normalfont\mdseries
-  \noindent
-  \begin{minipage}[t]{0.45\textwidth}
-    \IfFileExists{$rogle-lab-resources-dir$logos/rogle-logo.png}{%
-      \includegraphics[height=1.4cm]{$rogle-lab-resources-dir$logos/rogle-logo.png}%
-    }{}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.5\textwidth}
-    \raggedleft\footnotesize
-    $if(course.institution)$$course.institution$\\$else$Universitat Politècnica de València\\$endif$
-    $if(course.degree)$$course.degree$\\$endif$
-    $if(subject)$$subject$\\$else$$if(course.subject)$$course.subject$\\$endif$$endif$
-    $if(course.academic-year)$Curso $course.academic-year$$if(course.semester)$ · $course.semester$$endif$\\$endif$
-    $if(course.type)$\textbf{$course.type$}$if(course.code)$ -- $course.code$$endif$$endif$
-  \end{minipage}
-  \par\vspace{1.2em}}%
-}
+$if(course.institution)$\rogleInstitution{$course.institution$}$endif$
+$if(course.degree)$\rogleDegree{$course.degree$}$endif$
+$if(subject)$\rogleCourseSubject{$subject$}$elseif(course.subject)$\rogleCourseSubject{$course.subject$}$endif$
+$if(course.academic-year)$\rogleAcademicYear{$course.academic-year$}$endif$
+$if(course.semester)$\rogleSemester{$course.semester$}$endif$
+$if(course.type)$\rogleDocType{$course.type$}$endif$
+$if(course.code)$\rogleDocCode{$course.code$}$endif$
 
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
-\makeatletter
-\pretocmd{\@title}{\rogleCaseHeaderBlock}{}{}
-\makeatother
+\rogleDocTitle{$title$}
 $endif$
 $if(subtitle)$
-\makeatletter
-\providecommand{\subtitle}[1]{%
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
 \subtitle{$subtitle$}
 $endif$
 
@@ -54,3 +26,22 @@ $for(by-affiliation)$
 \affil[$it.number$]{$it.name$}
 $endfor$
 \date{$date$}
+
+$if(license)$
+\rogleLicense{$if(license.name)$$license.name$$else$$license$$endif$}{$if(license.url)$$license.url$$endif$}
+$endif$
+$if(copyright)$
+\rogleCopyright{$copyright.year$}{$copyright.holder$}
+$endif$
+
+$if(citation)$
+\rogleCiteAuthors{$if(authors)$$for(authors)$$it.name.family$, $it.name.given$$sep$; $endfor$$endif$}
+\rogleCiteYear{$if(citation.issued.date-parts)$$for(citation.issued.date-parts)$$for(it)$$it$$sep$/$endfor$$endfor$$elseif(citation.issued)$$citation.issued$$else$$date$$endif$}
+\rogleCiteTitle{$if(citation.title)$$citation.title$$else$$title$$endif$}
+$if(subject)$\rogleCiteSubject{$subject$}$endif$
+$if(citation.container-title)$\rogleCiteContainer{$citation.container-title$}$endif$
+$if(citation.volume)$\rogleCiteVolume{$citation.volume$}$endif$
+$if(citation.issue)$\rogleCiteIssue{$citation.issue$}$endif$
+$if(citation.doi)$\rogleCiteDOI{$citation.doi$}$endif$
+$if(citation.url)$\rogleCiteURL{$citation.url$}$endif$
+$endif$

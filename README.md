@@ -105,6 +105,13 @@ para que el PDI del lab redacte casos docentes / notas técnicas
 [ROGLE. Materiales docentes](https://riunet.upv.es/handle/10251/18261) de
 RiUNET) y no para que un alumno la use como plantilla de práctica.
 
+El diseño (portada, licencia, "Cómo citar", cabecera/pie) vive en una clase
+LaTeX propia, `rogle-case-upv.cls` — al estilo de `citym-upv.cls` — en vez de
+en un `template-partial` suelto. Admite temas intercambiables: crea
+`rogle-case-theme-<nombre>.tex` a partir de `rogle-case-theme-default.tex` y
+actívalo con un `rogle-case-preset.tex` (una línea,
+`\rogleUsePreset{<nombre>}`) junto al documento.
+
 ```bash
 quarto render mi-caso.qmd --to rogle-lab-case-pdf
 ```

@@ -35,5 +35,10 @@ example/_extensions/
 example/logos/
 example/cc-icons/
 
+# format-resources copied next to a rogle-lab-case render (quarto copies
+# rogle-case-upv.cls / rogle-case-theme-default.tex beside the output)
+*.cls
+!_extensions/**/*.cls
+
 # Local archives and work-in-progress
 archives/
