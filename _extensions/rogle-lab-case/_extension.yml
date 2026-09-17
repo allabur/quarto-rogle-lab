@@ -1,0 +1,44 @@
+title: ROGLE Case / Informe (uso interno PDI)
+author: Alberto Lacort
+version: 0.1.0
+quarto-required: ">=1.4.0"
+
+# Formato de portada tipo artículo de congreso para casos docentes / notas
+# técnicas del PDI de ROGLE pensados para depositar (RiUNET, Zenodo...). No
+# es el formato que instala `quarto use template allabur/quarto-rogle-lab`
+# para el enunciado de práctica de un alumno — ese sigue siendo la
+# extensión `rogle-lab` (formatos rogle-lab-pdf / rogle-lab-html).
+
+contributes:
+  formats:
+    pdf:
+      pdf-engine: xelatex
+      documentclass: article
+      papersize: a4
+      fontsize: 11pt
+      colorlinks: true
+      keep-tex: false
+      toc: false
+      number-sections: true
+      lang: es
+      link-citations: true
+
+      filters:
+        - rogle-lab-case.lua
+
+      geometry:
+        - top=25mm
+        - left=25mm
+        - right=25mm
+        - bottom=35mm
+
+      include-in-header:
+        - includes/packages.tex
+        - includes/colors.tex
+
+      include-before-body:
+        - includes/citation-callout.tex
+
+      template-partials:
+        - partials/title.tex
+        - partials/before-title.tex
