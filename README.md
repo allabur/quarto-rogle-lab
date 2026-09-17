@@ -94,34 +94,6 @@ article/
 | `upv-footer` | `content`: `license` \| `citation` \| `copyright` | Qué se muestra a la izquierda del pie (no confundir con la opción `footer`, reservada por Quarto) |
 | `citation` | CSL — `container-title`, `issued.year`, `volume`, `doi`… | Cita tipo CSL, útil para notas técnicas |
 
-## Formato "caso docente" (uso interno PDI, no para alumnos)
-
-Además del enunciado de práctica de arriba, el repo incluye una segunda
-extensión, `rogle-lab-case` (`_extensions/rogle-lab-case/`), con portada tipo
-artículo de congreso: logo ROGLE + bloque de metadatos académicos, autores
-con afiliaciones numeradas y ORCID, caja "Cómo citar" y licencia — pensada
-para que el PDI del lab redacte casos docentes / notas técnicas
-**depositables** (p. ej. en la colección
-[ROGLE. Materiales docentes](https://riunet.upv.es/handle/10251/18261) de
-RiUNET) y no para que un alumno la use como plantilla de práctica.
-
-```bash
-quarto render mi-caso.qmd --to rogle-lab-case-pdf
-```
-
-Ejemplo completo: `example/caso-drof.qmd` (transcripción del "Caso Premontaje
-DROF", ROGLE-UPV 2019). Campos propios de este formato, además de los de la
-tabla de metadatos de abajo:
-
-| Campo | Descripción |
-|-------|-------------|
-| `course.institution` | Institución, arriba a la derecha (por defecto "Universitat Politècnica de València") |
-| `course.degree` | Titulación/grado-máster |
-| `course.type` | Tipo de documento, p. ej. "Caso docente", "Nota técnica" |
-| `course.code` | Código del documento, p. ej. `CD-19-DROF` |
-| `course.academic-year`, `course.semester` | Curso académico / semestre |
-| `citation.url` | Enlace persistente genérico (p. ej. el Handle de RiUNET) — a diferencia de `citation.doi`, no asume formato `doi.org` |
-
 ## Requisitos
 
 - **Quarto** ≥ 1.4
