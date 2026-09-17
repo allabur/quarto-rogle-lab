@@ -13,10 +13,9 @@
 % versión.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rogle-case-upv}[2026/09/17 v0.1 ROGLE Case/Informe UPV]
-\LoadClass[11pt]{article}
+\ProvidesClass{rogle-case-upv}[2026/09/17 v0.3 ROGLE Case/Informe UPV]
+\LoadClass[10pt]{article}
 
-\RequirePackage[a4paper,top=25mm,left=25mm,right=25mm,bottom=35mm]{geometry}
 \RequirePackage{ifthen}
 \RequirePackage{etoolbox}
 \RequirePackage[table]{xcolor}
@@ -25,11 +24,42 @@
 \RequirePackage{lastpage}
 \RequirePackage[skins]{tcolorbox}
 \RequirePackage{fontawesome5}
+\RequirePackage{ccicons}
 \RequirePackage{iflang}
 \RequirePackage{orcidlink}
 \RequirePackage{authblk}
 \RequirePackage{caption}
 \RequirePackage[raggedright,compact,clearempty]{titlesec}
+
+% Cuerpo, geometría e interlineado — igual que citym-upv.cls (preset A4, no
+% el trim de libro 17×24, que solo aplica a un volumen encuadernado).
+\renewcommand{\normalsize}{\fontsize{10pt}{12pt}\selectfont}
+\RequirePackage{geometry}
+\geometry{
+  a4paper, twoside,
+  hmargin={3.0cm,3.0cm},
+  vmargin={2.0cm,2.0cm},
+  includehead, includefoot,
+  headsep = 0.75cm,
+  footskip = 1.0cm,
+  footnotesep = 0.6cm,
+}
+\setlength{\parskip}{2ex}
+\setlength{\parindent}{0pt}
+\linespread{1.0}
+\widowpenalty=150
+\clubpenalty=150
+\raggedbottom
+
+% Color de acento para enlaces (hyperref) — igual que \citymAccent.
+\colorlet{rogleAccent}{blue!70!black}
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{colorlinks=true,
+      linkcolor=rogleAccent, citecolor=rogleAccent,
+      urlcolor=rogleAccent, filecolor=rogleAccent}%
+  }{}%
+}
 
 % ============================================================================
 % COLORES UPV
@@ -75,11 +105,16 @@
 \newcommand{\rogleAbstractEnd}{\end{quote}}
 
 % Rótulos de figura/tabla — etiqueta en negrita, texto en cursiva, cuerpo
-% \footnotesize; sin el ajuste automático de justificación por ancho que usa
-% citym (issue #722 en ese repo), que añade bastante complejidad para un
-% documento con pocas figuras/tablas.
+% \footnotesize. citym usa un sistema de medición de ancho más elaborado
+% (\citymAutoAlign, issue #722 de ese repo) que centra una leyenda corta y
+% justifica una larga, PERO existe específicamente para el caso en que una
+% nota "Nota."/"Fuente." va pegada dentro del propio \caption{} y confunde
+% la medición nativa de `caption` — este formato no tiene ese mecanismo de
+% notas, así que basta la medición nativa (`singlelinecheck=true`), que da
+% el mismo resultado visual (corta → centrada, larga → justificada) sin la
+% complejidad de sobreescribir \caption.
 \newcommand{\rogleCaptionStyle}{%
-  \captionsetup{font=footnotesize,labelsep=period,justification=centering}%
+  \captionsetup{font=footnotesize,labelsep=period,justification=justified,singlelinecheck=true}%
   \captionsetup[figure]{labelfont=bf,textfont=it}%
   \captionsetup[table]{labelfont=bf,textfont=it}%
 }
@@ -169,9 +204,11 @@
 % ============================================================================
 % LICENCIA Y COPYRIGHT (pie de página)
 % ============================================================================
+% Iconos vectoriales (ccicons, FontAwesome) en vez de los PNG que usaba
+% v0.1-v0.2 — mismo paquete y mismo mecanismo que citym-upv.cls.
 \newboolean{rogleLicenseSet}\setboolean{rogleLicenseSet}{false}
 \newcommand{\quartoLicenseName}{}
-\newcommand{\quartoLicenseLogoPath}{}
+\newcommand{\quartoLicenseIcons}{}
 \newcommand{\quartoLicenseUrl}{}
 \newcommand{\quartoLicenseTextFallback}{%
   License: \ifthenelse{\equal{\quartoLicenseUrl}{}}{\quartoLicenseName}{\href{\quartoLicenseUrl}{\quartoLicenseName}} \ | %
@@ -187,13 +224,13 @@
   \setboolean{rogleLicenseSet}{true}%
   \renewcommand{\quartoLicenseName}{#1}%
   \ifthenelse{\equal{#2}{}}{}{\renewcommand{\quartoLicenseUrl}{#2}}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC BY}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc-by.png}}{}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC BY-SA}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc-by-sa.png}}{}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC BY-ND}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc-by-nd.png}}{}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc-by-nc.png}}{}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-SA}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc-by-nc-sa.png}}{}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-ND}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc-by-nc-nd.png}}{}%
-  \ifthenelse{\equal{\quartoLicenseName}{CC0}}{\renewcommand{\quartoLicenseLogoPath}{\rogleResourcesDirValue cc-icons/cc0.png}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY}}{\renewcommand{\quartoLicenseIcons}{\ccby}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-SA}}{\renewcommand{\quartoLicenseIcons}{\ccbysa}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-ND}}{\renewcommand{\quartoLicenseIcons}{\ccbynd}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC}}{\renewcommand{\quartoLicenseIcons}{\ccbync}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-SA}}{\renewcommand{\quartoLicenseIcons}{\ccbyncsa}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC BY-NC-ND}}{\renewcommand{\quartoLicenseIcons}{\ccbyncnd}}{}%
+  \ifthenelse{\equal{\quartoLicenseName}{CC0}}{\renewcommand{\quartoLicenseIcons}{\ccZero}}{}%
   \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
     \ifthenelse{\equal{\quartoLicenseName}{CC BY}}{\renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by/4.0/}}{}%
     \ifthenelse{\equal{\quartoLicenseName}{CC BY-SA}}{\renewcommand{\quartoLicenseUrl}{https://creativecommons.org/licenses/by-sa/4.0/}}{}%
@@ -208,18 +245,15 @@
 \newcommand{\rogleFooterLeft}{%
   \small
   \ifthenelse{\boolean{rogleLicenseSet}}{%
-    \ifthenelse{\equal{\quartoLicenseLogoPath}{}}{%
+    \ifthenelse{\equal{\quartoLicenseIcons}{}}{%
       \quartoLicenseTextFallback%
     }{%
-      \IfFileExists{\quartoLicenseLogoPath}{%
-        \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
-          \raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}%
-        }{%
-          \href{\quartoLicenseUrl}{\raisebox{-0.3\height}{\includegraphics[height=1.2em]{\quartoLicenseLogoPath}}}%
-        }\hspace{0.5em}%
+      \ifthenelse{\equal{\quartoLicenseUrl}{}}{%
+        \quartoLicenseIcons%
       }{%
-        \quartoLicenseTextFallback%
-      }%
+        \href{\quartoLicenseUrl}{\quartoLicenseIcons}%
+      }\ %
+      Esta obra se distribuye bajo licencia \textbf{\quartoLicenseName}. \ | \ %
     }%
   }{}%
   \ifthenelse{\equal{\rogleCopyrightYearValue}{}}{}{\textcopyright\ \rogleCopyrightYearValue\ \rogleCopyrightHolderValue}%
