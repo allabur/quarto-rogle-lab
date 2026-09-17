@@ -1,5 +1,6 @@
 % rogle-case-theme-default.tex — tema por omisión de rogle-case-upv.cls.
-% Reproduce el diseño de rogle-lab-case 0.1.0 tal cual. Para un tema nuevo,
+% Reproduce el diseño tipográfico de citym-upv.cls (título/secciones 13pt,
+% resumen con reglas, captions en negrita+cursiva). Para un tema nuevo,
 % copia este fichero como rogle-case-theme-<nombre>.tex y redefine solo los
 % hooks que cambies; actívalo con \rogleUsePreset{<nombre>} desde un
 % rogle-case-preset.tex junto al documento.
@@ -8,3 +9,26 @@
 \renewcommand{\rogleAffilFont}{\normalfont\small}
 \renewcommand{\rogleHowToCiteFont}{\footnotesize}
 \renewcommand{\rogleCourseInfoFont}{\footnotesize}
+
+\renewcommand{\rogleTitleAlign}{\centering}
+\renewcommand{\rogleTitleFont}{\fontsize{13}{15}\bfseries}
+\renewcommand{\rogleSectionFont}{\fontsize{13}{15}\bfseries}
+\renewcommand{\rogleSectionBefore}{2ex}
+\renewcommand{\rogleSectionAfter}{1ex}
+\renewcommand{\rogleSubsectionFont}{\fontsize{10}{12}\bfseries}
+\renewcommand{\rogleSubsectionBefore}{1.5ex}
+\renewcommand{\rogleSubsectionAfter}{1ex}
+\renewcommand{\rogleSubsubsectionFont}{\normalsize\itshape}
+\renewcommand{\rogleSubsubsectionBefore}{2ex}
+\renewcommand{\rogleSubsubsectionAfter}{1ex}
+
+\renewcommand{\rogleAbstractRuleAbove}{\rule{\linewidth}{0.2pt}\\[0ex]}
+\renewcommand{\rogleAbstractRuleBelow}{\par\vspace{-0.5ex}\rule{\linewidth}{0.2pt}}
+\renewcommand{\rogleAbstractBegin}{\begin{quote}}
+\renewcommand{\rogleAbstractEnd}{\end{quote}}
+
+\renewcommand{\rogleCaptionStyle}{%
+  \captionsetup{font=footnotesize,labelsep=period,justification=centering}%
+  \captionsetup[figure]{labelfont=bf,textfont=it}%
+  \captionsetup[table]{labelfont=bf,textfont=it}%
+}

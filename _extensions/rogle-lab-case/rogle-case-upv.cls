@@ -28,6 +28,8 @@
 \RequirePackage{iflang}
 \RequirePackage{orcidlink}
 \RequirePackage{authblk}
+\RequirePackage{caption}
+\RequirePackage[raggedright,compact,clearempty]{titlesec}
 
 % ============================================================================
 % COLORES UPV
@@ -51,6 +53,36 @@
 \newcommand{\rogleAffilFont}{\normalfont\small}
 \newcommand{\rogleHowToCiteFont}{\footnotesize}
 \newcommand{\rogleCourseInfoFont}{\footnotesize}
+
+% Título y secciones — mismos tamaños que citym-upv.cls (13pt/15pt para
+% título y sección de primer nivel, misma jerarquía de sub/subsub).
+\newcommand{\rogleTitleAlign}{\centering}
+\newcommand{\rogleTitleFont}{\fontsize{13}{15}\bfseries}
+\newcommand{\rogleSectionFont}{\fontsize{13}{15}\bfseries}
+\newcommand{\rogleSectionBefore}{2ex}
+\newcommand{\rogleSectionAfter}{1ex}
+\newcommand{\rogleSubsectionFont}{\fontsize{10}{12}\bfseries}
+\newcommand{\rogleSubsectionBefore}{1.5ex}
+\newcommand{\rogleSubsectionAfter}{1ex}
+\newcommand{\rogleSubsubsectionFont}{\normalsize\itshape}
+\newcommand{\rogleSubsubsectionBefore}{2ex}
+\newcommand{\rogleSubsubsectionAfter}{1ex}
+
+% Resumen — mismo bloque con reglas horizontales arriba/abajo que citym.
+\newcommand{\rogleAbstractRuleAbove}{\rule{\linewidth}{0.2pt}\\[0ex]}
+\newcommand{\rogleAbstractRuleBelow}{\par\vspace{-0.5ex}\rule{\linewidth}{0.2pt}}
+\newcommand{\rogleAbstractBegin}{\begin{quote}}
+\newcommand{\rogleAbstractEnd}{\end{quote}}
+
+% Rótulos de figura/tabla — etiqueta en negrita, texto en cursiva, cuerpo
+% \footnotesize; sin el ajuste automático de justificación por ancho que usa
+% citym (issue #722 en ese repo), que añade bastante complejidad para un
+% documento con pocas figuras/tablas.
+\newcommand{\rogleCaptionStyle}{%
+  \captionsetup{font=footnotesize,labelsep=period,justification=centering}%
+  \captionsetup[figure]{labelfont=bf,textfont=it}%
+  \captionsetup[table]{labelfont=bf,textfont=it}%
+}
 
 \newcommand{\rogleUsePreset}[1]{%
   \InputIfFileExists{rogle-case-theme-#1.tex}{}{%
@@ -126,6 +158,11 @@
 % \@title ya está definido por \LoadClass{article}; en un .cls (a diferencia
 % de un documento) el catcode de @ ya es de letra, así que no hace falta
 % \makeatletter/\makeatother aquí.
+%
+% El texto del título se envuelve en \rogleTitleFont aquí (no dejando que
+% \@maketitle de authblk decida su tamaño), para no depender de cómo esa
+% clase estiliza \@title internamente.
+\renewcommand{\title}[1]{\gdef\@title{\rogleTitleAlign\rogleTitleFont #1}}
 \pretocmd{\@title}{\rogleCaseHeaderBlock}{}{}
 \newcommand{\subtitle}[1]{\apptocmd{\@title}{\par {\large #1 \par}}{}{}}
 
@@ -280,3 +317,50 @@
   \renewcommand{\footrulewidth}{0.4pt}%
   \rogleHeaderContent
 }
+
+% ============================================================================
+% APLICACIÓN DE LOS HOOKS DE TEMA — al final del fichero, para que ya recoja
+% cualquier redefinición hecha por rogle-case-theme-<nombre>.tex.
+% ============================================================================
+
+% Solo se numeran 2 niveles (igual que citym-upv.cls).
+\setcounter{secnumdepth}{2}
+
+\titleformat{\section}
+  [hang]
+  {\vspace{\rogleSectionBefore}\raggedright\tolerance=10000\hyphenpenalty=10000}
+  {\rogleSectionFont\thesection}
+  {.75em}
+  {\rogleSectionFont}
+  [\vspace{\rogleSectionAfter}]
+
+\titleformat{\subsection}
+  [hang]
+  {\vspace{\rogleSubsectionBefore}\raggedright\tolerance=10000\hyphenpenalty=10000}
+  {\rogleSubsectionFont\thesubsection}
+  {.5em}
+  {\rogleSubsectionFont}
+  [\vspace{\rogleSubsectionAfter}]
+
+\titleformat{\subsubsection}
+  [hang]
+  {\vspace{\rogleSubsubsectionBefore}\raggedright\tolerance=10000\hyphenpenalty=10000}
+  {\rogleSubsubsectionFont}
+  {0em}
+  {\rogleSubsubsectionFont}
+  [\vspace{\rogleSubsubsectionAfter}]
+
+% Resumen — usa \abstractname (localizado por babel vía la YAML `lang:`),
+% no un literal "Abstract"/"Resumen", para no perder la traducción que ya
+% funcionaba con el entorno `abstract` por defecto de `article`.
+\renewenvironment{abstract}{%
+  \if@twocolumn\else\vspace{-2ex}\rogleAbstractBegin\fi
+  \rogleAbstractRuleAbove
+  \small\itshape\textbf{\abstractname}
+
+}{%
+  \rogleAbstractRuleBelow
+  \if@twocolumn\else\rogleAbstractEnd\fi
+}
+
+\rogleCaptionStyle
