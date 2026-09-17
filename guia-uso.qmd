@@ -1,0 +1,193 @@
+---
+# =============================================================================
+# GUÍA DE USO — extensión Quarto `rogle-lab`
+# =============================================================================
+# Este documento es a la vez GUÍA y EJEMPLO: cada campo de la YAML lleva un
+# comentario explicando para qué sirve y qué valores acepta. Duplícalo o
+# cópialo como punto de partida cuando quieras entender una opción concreta;
+# para crear una práctica nueva desde cero usa `template.qmd`.
+#
+# RENDERIZADO
+#   quarto render guia-uso.qmd --to rogle-lab-pdf
+#   quarto render guia-uso.qmd --to rogle-lab-html
+#
+# Si prefieres no pasar `--to` cada vez, fija el formato en esta misma YAML
+# (ver bloque `format:` más abajo, comentado por defecto).
+# =============================================================================
+
+# --- Formato --------------------------------------------------------------
+# La extensión define dos formatos: `rogle-lab-pdf` y `rogle-lab-html`.
+# Si no fijas `format:` aquí, `quarto render` sin `--to` usará el HTML
+# genérico de Pandoc (NO el de esta extensión) — pásalo siempre por `--to`
+# o descomenta una de las líneas de abajo.
+#
+# format: rogle-lab-pdf
+# format:
+#   rogle-lab-pdf: default
+#   rogle-lab-html: default
+
+# --- Identificación del documento ------------------------------------------
+title: "Guía de uso de la extensión rogle-lab"
+subtitle: "Ejemplo comentado de todas las opciones soportadas"
+
+# `subject` aparece en la cabecera de cada página, junto al título.
+# Alternativa equivalente: `course: {subject: "..."}` (solo se usa
+# `course.subject`; el resto de sub-campos de `course` que aparecían en
+# versiones antiguas del README — code, lab-number, degree, group,
+# academic-year, semester, duration — NO están implementados todavía en
+# la plantilla, aunque los aceptes en la YAML no se mostrarán en ningún sitio.
+subject: "Gestión de operaciones y logística"
+
+# --- Autor(es) ---------------------------------------------------------------
+# Esquema estándar de Quarto/CSL. Campos usados por esta plantilla:
+#   - name.literal (o name.given + name.family): nombre mostrado
+#   - orcid: si lo indicas, se añade el icono ORCID enlazado junto al nombre
+#   - affiliations: lista de refs a la sección `affiliations` de abajo
+# Para varios autores, añade más elementos a la lista.
+author:
+  - id: allabur
+    name:
+      given: "Alberto"
+      family: "Lacort"
+      literal: "Alberto Lacort"
+    orcid: "0000-0001-7571-0494"
+    affiliations:
+      - ref: upv
+
+affiliations:
+  - id: upv
+    name: "Universitat Politècnica de València"
+    department: "Departamento de Organización de Empresas"
+    city: "València"
+    country: "España"
+    url: "https://upv.es"
+
+# --- Fecha e idioma -----------------------------------------------------------
+date: today
+date-format: long        # "17 de septiembre de 2026" en vez de "2026-09-17"
+lang: es                  # afecta a textos generados por Pandoc (TOC, "Índice"…)
+
+# --- Licencia (pie de página) ------------------------------------------------
+# `license.name` debe ser EXACTAMENTE uno de estos valores para que se
+# muestre el icono Creative Commons correcto (si no coincide, cae en un
+# texto plano de fallback sin icono):
+#   CC BY | CC BY-SA | CC BY-ND | CC BY-NC | CC BY-NC-SA | CC BY-NC-ND | CC0
+# Puedes sobreescribir la URL del icono con `license.url`, o usar tu propio
+# icono con `license.logo: "ruta/a/tu-icono.png"`.
+license:
+  name: "CC BY-NC-SA"
+
+# `copyright` se muestra junto al icono de licencia, en el pie de página.
+copyright:
+  holder: "Alberto Lacort"
+  year: 2026
+
+# --- Resumen y palabras clave -------------------------------------------------
+abstract: |
+  Este documento sirve como referencia de todas las opciones de metadatos y
+  elementos de contenido soportados por la extensión `rogle-lab`, con
+  ejemplos renderizables de cada uno.
+
+keywords:
+  - quarto
+  - plantilla
+  - rogle-lab
+
+# --- Cita (opcional) -----------------------------------------------------------
+# Si defines este bloque aparece, ANTES del título, un recuadro "Cómo citar"
+# con la referencia en formato APA-like generada a partir de estos campos.
+# Útil en notas técnicas o documentos que se van a publicar/repositar.
+# Descomenta para probarlo:
+#
+# citation:
+#   container-title: "RIUNET Repositorio UPV"
+#   issued:
+#     year: 2026
+#   doi: "10.5555/example"
+---
+
+# Introducción
+
+Esta guía documenta, con ejemplos renderizados, todo lo que la extensión
+`rogle-lab` sabe hacer hoy. Úsala como referencia rápida — no como plantilla
+de partida (para eso está `template.qmd`).
+
+# Callouts disponibles
+
+Los cuatro tipos estándar de Quarto se ven bien con los colores de la
+plantilla:
+
+::: {.callout-note}
+## Nota
+Texto informativo general.
+:::
+
+::: {.callout-tip}
+## Consejo
+Sugerencias o buenas prácticas.
+:::
+
+::: {.callout-important}
+## Objetivos de aprendizaje
+Usado normalmente para los objetivos de una práctica.
+:::
+
+::: {.callout-warning}
+## Detalles de la práctica
+Usado normalmente para duración, modalidad, requisitos previos y recursos.
+:::
+
+# Tablas y referencias cruzadas
+
+Las tablas numeradas y referenciables funcionan igual que en cualquier
+documento Quarto:
+
+| Criterio | Peso | Descripción |
+|----------|:----:|-------------|
+| Criterio 1 | 25% | … |
+| Criterio 2 | 25% | … |
+
+: Ejemplo de rúbrica {#tbl-ejemplo}
+
+Puedes referenciarla en el texto como @tbl-ejemplo, y a las secciones con
+`{#sec-id}` en el encabezado + `@sec-id` en el texto.
+
+# Citas bibliográficas (opcional)
+
+Esta extensión no añade nada especial para bibliografías: usa el mecanismo
+estándar de Pandoc/Quarto añadiendo a la YAML:
+
+```yaml
+bibliography: referencias.bib
+```
+
+y citando con `[@clave]` en el texto. Si no vas a citar nada, **borra** la
+sección `# Referencias` y el div `{#refs}` del final de tu documento — si
+los dejas sin bibliografía configurada, aparece un apartado "Referencias"
+vacío en el índice (es lo que hace hoy `template.qmd`).
+
+# Notas sobre la cabecera y el pie
+
+- **Cabecera:** a la izquierda `subject` (o `course.subject`) + título; a la
+  derecha el logo de ROGLE (`_extensions/rogle-lab/resources/logos/rogle-logo.png`).
+  Los logos de UPV y del departamento están en `resources/logos/` pero no se
+  usan en ningún partial todavía.
+- **Pie:** a la izquierda, icono de licencia (o texto de fallback) +
+  copyright; a la derecha, página actual / total.
+- Ambos son fijos vía `fancyhdr` — para cambiarlos hay que editar el
+  partial `before-title.tex` de la extensión, no la YAML del documento
+  (salvo los campos ya descritos arriba).
+
+# Referencia rápida de campos YAML
+
+| Campo | Dónde se usa | Notas |
+|-------|--------------|-------|
+| `title`, `subtitle` | Portada | Estándar Pandoc |
+| `subject` / `course.subject` | Cabecera | Solo se lee `course.subject`, ningún otro sub-campo de `course` |
+| `author`, `affiliations` | Portada | Esquema CSL estándar; ORCID opcional |
+| `date`, `date-format`, `lang` | Portada / textos generados | |
+| `license.name` (+ `url`, `logo`) | Pie de página | Ver lista de valores válidos arriba |
+| `copyright.holder`, `copyright.year` | Pie de página | |
+| `abstract`, `keywords` | Portada | |
+| `citation.*` | Recuadro "Cómo citar" antes del título | Opcional |
+| `bibliography` | Mecanismo estándar de Pandoc | No es específico de esta extensión |

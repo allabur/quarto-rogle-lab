@@ -28,7 +28,7 @@ __pycache__/
 .claude/
 
 # Quarto build artifacts
-template_files/
+*_files/
 example/_extensions/
 /logos/
 /cc-icons/
